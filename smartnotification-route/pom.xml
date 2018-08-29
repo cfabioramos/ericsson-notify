@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>br.com.ericsson.smartnotification</groupId>
+        <artifactId>smartnotification</artifactId>
+        <version>0.0.1</version>
+    </parent>
+
+    <artifactId>smartnotification-route</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- Project Struture -->
+        <dependency>
+            <groupId>br.com.ericsson.smartnotification</groupId>
+            <artifactId>smartnotification-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>br.com.ericsson.smartnotification</groupId>
+            <artifactId>smartnotification-mongo</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>br.com.ericsson.smartnotification</groupId>
+            <artifactId>smartnotification-redis</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>br.com.ericsson.smartnotification</groupId>
+            <artifactId>smartnotification-log</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

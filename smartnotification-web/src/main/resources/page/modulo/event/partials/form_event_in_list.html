@@ -1,0 +1,59 @@
+<form th:fragment="form-event" class="card" style="margin-bottom: 10px" th:onsubmit="|return submitAjax(this, '/modulo/event/update', undefined, '#containerEventMaster${event.id}', true)|" 
+	xmlns:th="http://www.thymeleaf.org">
+	<input hidden="" name="id" th:value="${event.id}">
+	<input hidden="" name="name" th:value="${event.name}">
+	<div class="card-body" role="tab" th:id="|heading${{event.id}}|">
+		<div class="row">
+			<div class="col-2 text-center font-weight-bold" th:text="${event.eventType < 10 ? '#00' + event.eventType : event.eventType < 100 ?  '#000' + event.eventType : '#' + event.eventType}">
+				Número
+			</div>
+			<div class="col-2 text-center" th:text="${event.name}">
+				Nome
+			</div>
+			<div class="col-2 text-center" th:text="${event.origem}">
+				Origem
+			</div>
+			<div class="col-2 text-center">
+				<div class="switch">
+				    <label>
+				        Inativo
+				        <input type="checkbox" th:checked="${event.active}" name="active" th:id="|eventCheckedActive${event.id}|" th:disabled="${colapsedOpen != null && colapsedOpen ? 'false' : 'true'}" onchange="$('#eventActive').val($(this).prop('checked'))">
+				        <span class="lever"></span>
+				        Ativo
+				    </label>
+				</div>
+			</div>
+			<div class="col-4 text-right">
+				<div class="row">
+					<div class="col-10">
+			            <a data-toggle="collapse" th:href="|#collapse${{event.id}}|" aria-expanded="false" th:aria-controls="|collapse${{event.id}}|" class="grey-text" th:onclick="|$('#eventCheckedActive${{event.id}}').prop('disabled') ? $('#eventCheckedActive${{event.id}}').prop('disabled', false) : $('#eventCheckedActive${{event.id}}').prop('disabled', true)|">
+			                <h5 class="mb-0">
+			                    Ver mais <i class="fa fa-angle-down rotate-icon"></i>
+			                </h5>
+			            </a>
+					</div>
+					<div class="col-2">
+		            	<a class="dropdown" th:id="|dropdownOptionLink${{event.id}}|" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+		            	</a>
+                        <div class="dropdown-menu dropdown-primary" th:aria-labelledby="|dropdownOptionLink${{event.id}}|">
+                            <a  id="editEvent" class="dropdown-item waves-effect waves-light" data-toggle="modal" data-target="#modalEditEvent" th:onclick="|loadHtml('/modulo/event/edit/${{event.id}}', '#containerEditEvent')|">
+                                Editar
+                            </a> 
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <partial th:insert="../page/modulo/event/partials/edit_event :: partial" th:id="|containerEventInfo${{event.id}}|">
+    </partial>
+    <div th:insert="fragment/dialog :: dialog" 
+      	th:with="message='Atualizado com sucesso'
+      	,modalId=sucessUpdateEvent
+      	,modalLabel=sucessUpdateEventLabel">
+    </div>
+    <script type="text/javascript" th:if="${showDialogUpdateEvent != null && showDialogUpdateEvent}">
+       	$("#sucessUpdateEvent").modal();
+   	</script>
+</form>

@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<div th:fragment="dialog" class="modal fade top" th:id="${modalId}"
+	tabindex="-1" role="dialog"
+	th:aria-labelledby="${modalLabel}"
+	aria-hidden="true" xmlns:th="http://www.thymeleaf.org"> 
+	<div class="modal-dialog modal-frame modal-top" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="row d-flex justify-content-center align-items-center">
+	
+					<p class="pt-3 pr-2" th:text="${message}">message</p>
+	
+					<button type="button" class="btn btn-outline-grey"
+						data-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-elegant" data-dismiss="modal"
+						th:onclick="${actionConfirm}">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

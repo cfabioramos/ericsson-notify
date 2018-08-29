@@ -1,0 +1,47 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="list-events" >
+	<div th:if="${!eventsDefinitions.isEmpty()}" >
+		<div class="row">
+			<div class="col-2 text-center font-weight-bold">	
+				Número
+			</div>
+			<div class="col-2 text-center font-weight-bold">
+				Nome
+			</div>
+			<div class="col-2 text-center font-weight-bold">
+				Origem
+			</div>
+			<div class="col-2 text-center font-weight-bold">
+				Status
+			</div>
+		</div>
+		<div  th:each="event : ${eventsDefinitions}" th:if="${!eventsDefinitions.isEmpty()}">
+			<div th:id="|containerEventMaster${event.id}|">
+	    		<div th:insert="../page/modulo/event/partials/form_event_in_list :: form-event"></div>
+			</div>
+		    <div th:insert="fragment/dialog :: dialog" 
+		    	th:with="message='Ao cancelar as alterações serão perdidas, deseja confirmar a operação?'
+		    	,modalId='modalCancelEvent' + ${event.id}
+		    	,modalLabel='modalCancelEventLabel' + ${event.id}
+		    	,actionConfirm='loadHtml(\'/modulo/event/' + ${event.id} + '\', \'#containerEventMaster' + ${event.id} +'\')'">
+		    </div>
+		</div>
+		<!--Pagination-->
+	    <div th:insert="fragment/pagination :: pagination" th:with="idModalClose=undefined,idContainnerReturnHtml='#containnerEvents',clearContainnerReturnHtml='true'">
+	    </div>
+	</div>
+	<br/>
+	<br/>
+	<center th:if="${eventsDefinitions.isEmpty()}" class="m-t-20">
+		<i class="fa fa-3x fa-bell" aria-hidden="true"></i>
+		<div>Não há nenhum evento cadastrado</div>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEditEvent" th:onclick="|loadHtml('/modulo/event/new', '#containerEditEvent')|"><i class="fa fa-plus mr-1"></i>Criar novo evento</button>
+	</center>
+    <div th:insert="fragment/dialog :: dialog" 
+      	th:with="message='Salvo com sucesso'
+      	,modalId=sucessEventSave
+      	,modalLabel=sucessSaveEventLabel">
+    </div>
+    <script type="text/javascript" th:if="${showDialogEventSave != null && showDialogEventSave}">
+       	$("#sucessEventSave").modal();
+   	</script>
+</div>

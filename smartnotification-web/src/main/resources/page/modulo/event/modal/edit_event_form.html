@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<form class="modal-content" id="formEditEvent"
+		onsubmit="return submitAjax(this, '/modulo/event/save', '#modalEditEvent', '#containnerEvents', true)"
+		onload="autocompleteRemote('.autocomplete-origin', '/origin/search');">
+		<input type="text"
+					id="event-id" name="id"
+					th:value="${event.id}"
+					hidden="">
+		<div class="modal-header text-left">
+			<h4 class="modal-title w-100 font-weight-bold">Criar Novo Evento</h4>
+			<div class="switch">
+				<label> Inativo <input type="checkbox" checked="checked"
+					name="active"> <span class="lever"></span> Ativo
+				</label>
+			</div>
+		</div>
+		<div class="modal-body">
+			<div class="form-group">
+				<label for="event-type">Número</label> <input type="number"
+					id="event-type" class="form-control" name="eventType"
+					required="required"
+					th:value="${event.eventType}"
+					maxlength="4"
+					oninvalid="this.setCustomValidity('O número do evento é obrigatório')"
+					oninput="this.setCustomValidity('')">
+			</div>
+			<div class="form-group">
+				<label for="event-name">Nome</label> <input type="text"
+					id="event-name" class="form-control" name="name" required="required"
+					oninvalid="this.setCustomValidity('O nome do evento é obrigatório')"
+					oninput="this.setCustomValidity('')"
+					th:value="${event.name}"
+					maxlength="100">
+			</div>
+			<div class="form-group">
+				<label for="event-origem">Origem</label> <input type="text"
+					id="event-origem" class="form-control autocomplete-origin" name="origem"
+					required="required"
+					th:value="${event.origem}"
+					maxlength="100"
+					oninvalid="this.setCustomValidity('Informe ao menos uma origem')"
+					oninput="this.setCustomValidity('')"
+					autocomplete="off">
+			</div>
+		</div>
+		<div class="modal-footer d-flex">
+			<a data-dismiss="modal" aria-label="Close"> Cancelar </a>
+			<button class="btn btn-elegant" type="submit">Salvar</button>
+		</div>
+	</form>
+    <script type="text/javascript">
+    	autocompleteRemote('.autocomplete-origin', '/origin/search');
+    </script>
+</html>

@@ -1,0 +1,48 @@
+<div class="card" th:fragment="filter" xmlns:th="http://www.thymeleaf.org">
+	<div class="card-body">
+       	<div class="row">
+       		<div class="col-11">
+				<h5 class="main-title font-weight-bold">Filtros</h5>
+       		</div>
+			<div class="col-1">
+            	<a class="dropdown float-right" id="filterMore" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+            	</a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="filterMore">
+                    <a  id="editEvent" class="dropdown-item waves-effect waves-light">
+                    </a> 
+                </div>
+			</div>
+       		<form class="col-12" th:onsubmit="|return submitAjax(this, '${{urlController}}/filter', '${idModalClose}', '${idContainnerReturnHtml}', ${clearContainnerReturnHtml});|" action="#">
+	       		<ul class="nav py-4">
+    				<li class="nav-item" th:each="option : ${FilterView.options}">
+    					<input type="hidden" name="collection:options:name" th:value="${option.name}">
+    					<input type="hidden" name="collection:options:field" th:value="${option.field}">
+		       			<table>
+		       				<tr>
+		       					<td><i class="fa fa-chevron-right" aria-hidden="true" id="iconStatus"></i><td>
+		       					<td><input type="checkbox" name="collection:options:checked" th:id="|inputFilter${option.name}|" th:checked="${option.checked}" th:onchange="|$(this).prop('checked') ? $('#dropDown${option.name}').show(): $('#dropDown${option.name}').hide()|"><td>
+		       					<td>
+							    	<a th:text="${option.name}" class="dropdown font-weight-bold" th:id="|dropdownOptionFilter${option.name}|" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					                    name
+					            	</a>
+					                 <div th:id="|dropDown${option.name}|" class="dropdown-menu dropdown-primary" th:aria-labelledby="|dropdownOptionFilter${option.name}|">
+					                 	<div class="dropdown-item" th:each="option2 : ${option.options}">
+					                 		<input type="hidden" name="" th:value="${option2.name}">
+					                 		<input type="hidden" name="" th:value="${option2.field}">
+						                 	<input name=""  type="checkbox" th:id="|inputFilter${option2.name}|" onchange="$('#filterSubmit').click();">
+						                 	<label th:for="|inputFilter${option2.name}|" th:text="${option2.name}">name</label>
+					                 	</div>
+					                 </div>
+		   						</td>
+		      				</tr>
+		       			</table>
+		   	 		</li>
+		   	 		<li hidden="true">
+		   	 			<button  id="filterSubmit" type="submit">Salvar</button>
+		   	 		</li>
+	       		</ul>
+       		</form>
+       	</div>
+	</div>
+</div>

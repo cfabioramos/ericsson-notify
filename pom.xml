@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>br.com.ericsson.smartnotification</groupId>
+    <artifactId>smartnotification</artifactId>
+    <version>0.0.1</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.2.RELEASE</version>
+        <relativePath />
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <docker.image.prefix>smartnotification</docker.image.prefix>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+<!--     mains -->
+        <module>smartnotification-core</module>
+        <module>smartnotification-gateway</module>
+        <module>smartnotification-rules-engine</module>
+        <module>smartnotification-web</module>
+        <module>smartnotification-enrichment</module>
+        <module>smartnotification-scheduler</module>
+        <module>smartnotification-route</module>
+        <module>smartnotification-campaign</module>
+<!--     providers -->
+        <module>smartnotification-mongo</module>
+        <module>smartnotification-test</module>
+        <module>smartnotification-redis</module>
+        <module>smartnotification-log</module>
+    </modules>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <classifier>boot</classifier>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>dockerfile-maven-plugin</artifactId>
+                    <version>1.3.6</version>
+                    <configuration>
+                        <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                        <buildArgs>
+                            <JAR_FILE>target/${project.build.finalName}-boot.jar</JAR_FILE>
+                        </buildArgs>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

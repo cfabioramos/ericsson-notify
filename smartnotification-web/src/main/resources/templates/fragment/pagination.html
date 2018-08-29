@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<div th:fragment="pagination" aria-label="pagination" th:if="${PageableView != null}" xmlns:th="http://www.thymeleaf.org">
+	<form class="row" action="#" th:onsubmit="|return $('#fromPage').val() <=  ${PageableView.getTotalPages()} && $('#fromPage').val() > 0 ? submitAjax(this, '${{urlController}}/changePage', '${idModalClose}', '${idContainnerReturnHtml}', ${clearContainnerReturnHtml}) : false;|">
+		<div class="col-8">
+		    <ul class="pagination pagination-circle pg-dark">
+		        <li class="page-item" th:if="${PageableView.current > 1}">
+		            <a class="page-link" href="#" aria-label="Previous" th:onclick="|$('#fromPage').val(${PageableView.current -1});$('#filterSubmitBtn').click();|">
+						<i class="fa fa-arrow-left" aria-hidden="true"></i>
+		                <span class="sr-only">Previous</span>
+		            </a>
+		        </li>
+		        <li th:class="|page-item ${PageableView.current == p ? 'active' : ''}|" th:each="p : ${#numbers.sequence(1, PageableView.getTotalPages())}">
+		        	<a class="page-link" href="#" th:text="${p}" th:onclick="|$('#fromPage').val(${p});$('#filterSubmitBtn').click();|">1</a>
+	        	</li>
+		        <li class="page-item" th:if="${PageableView.current < PageableView.getTotalPages()}">
+		            <a class="page-link" href="#" aria-label="Next" th:disable="${PageableView.current == PageableView.getTotalPages()}" th:onclick="|$('#fromPage').val(${PageableView.current +1});$('#filterSubmitBtn').click();|">
+						<i class="fa fa-arrow-right" aria-hidden="true"></i>
+		                <span class="sr-only">Next</span>
+		            </a>
+		        </li>
+		    </ul>
+		</div> 
+		<div class="col-4">
+		    <div class="form-row">
+		    	<div class="col"><p class="text-right m-t-5">Exibir</p></div>
+		    	<div class="col">
+					<select name="totalItemsPerPage" id="pagination-select" class="form-control form-control-sm" onchange="$('#filterSubmitBtn').click();">
+						<option value="5" th:selected="${PageableView.totalItemsPerPage == 5}">5</option>
+						<option value="10" th:selected="${PageableView.totalItemsPerPage == 10}">10</option>
+						<option value="15" th:selected="${PageableView.totalItemsPerPage == 15}">15</option>
+					</select>
+		    	</div>
+		    	<div class="col"><p class="text-right m-t-5">Ir para</p></div>
+		    	<div class="col">
+					<input id="fromPage" type="number" th:value="${PageableView.current}" name="current" class="form-control form-control-sm">
+		    	</div>
+		    	<div hidden="true">
+		    		<input id="filterSubmitBtn" type="submit"/>
+		    	</div>
+		    </div>
+		</div>
+	</form>
+</div>

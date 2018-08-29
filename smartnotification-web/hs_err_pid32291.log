@@ -1,0 +1,33 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007f85139bdfb2, pid=32291, tid=6214
+#
+# JRE version: Java(TM) SE Runtime Environment (10.0.1+10) (build 10.0.1+10)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (10.0.1+10, mixed mode, tiered, compressed oops, g1 gc, linux-amd64)
+# Problematic frame:
+# C  [libjimage.so+0x3fb2]  ImageStrings::find(Endian*, char const*, int*, unsigned int)+0x42
+#
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/share/apport/apport %p %s %c %d %P" (or dumping to /home/edu/Documents/repo/ericsson/smart-notification-poc/smartnotification-web/core.32291)
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:33163 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=45177 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=localhost -Dspring.liveBeansView.mbeanDomain -Dspring.application.admin.enabled=true -Djava.security.egd=file:/dev/./urandom -Xverify:none -XX:TieredStopAtLevel=1 -Dfile.encoding=UTF-8 br.com.ericsson.smartnotification.web.SmartPushWebApplication --spring.output.ansi.enabled=always
+
+Host: Intel(R) Core(TM) i5-7200U CPU @ 2.50GHz, 4 cores, 7G, Ubuntu 18.04.1 LTS
+Time: Fri Aug 10 00:07:55 2018 -03 elapsed time: 9250 seconds (0d 2h 34m 10s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f84d0018000):  JavaThread "restartedMain" [_thread_in_vm, id=6214, stack(0x00007f8476aa2000,0x00007f8476ba3000)]
+
+Stack: [0x00007f8476aa2000,0x00007f8476ba3000],  sp=0x00007f8476b9d5e0,  free space=1005k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libjimage.so+0x3fb2]  ImageStrings::find(Endian*, char const*, int*, unsigned int)+0x42
+C  [libjimage.so+0x4b8c]  ImageFileReader::find_location_index(char const*, unsigned long long*) const+0x3c
+C  [libjimage.so+0x505a]  JIMAGE_FindResource+0xba
+V  [libjvm.so+0x5f853e]

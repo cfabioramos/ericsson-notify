@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	th:replace="layout.html :: layout (content=~{:: main},titlePage=Eventos,buttonViewText='Criar novo Evento',idButtonViewModal='#modalEditEvent',buttonViewAction='loadHtml(\'/modulo/event/new\', \'#containerEditEvent\')')"
+	th:with="titlePage=Eventos"
+	>
+
+	<main>
+		<!--filter-->
+        <div th:insert="fragment/filter :: filter" th:if="${FilterView != null}" th:with="idModalClose=undefined,idContainnerReturnHtml='#containnerEvents',clearContainnerReturnHtml='true'">
+        </div>
+		<br/>
+		<div id="containnerEvents">
+	        <div th:insert="../page/modulo/event/partials/list-events :: list-events">
+        	</div>
+		</div>
+        <div th:insert="../page/modulo/event/modal/modal-edit_event.html :: modal-edit-event">
+        </div>
+	</main>
+</html>

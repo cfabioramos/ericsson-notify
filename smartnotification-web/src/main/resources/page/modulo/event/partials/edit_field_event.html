@@ -1,0 +1,37 @@
+<partial class="row" xmlns:th="http://www.thymeleaf.org">
+	<input name="collection:fields:id" th:value="${field.id}" hidden="" th:disabled="${field.fixed}">
+	<input name="collection:fields:fixed" th:value="${field.fixed}" hidden="" th:disabled="${field.fixed}">
+	<div class="col-2">
+		<input type="text" id="field-name" class="form-control" name="collection:fields:name" placeholder="Digite o nome" th:value="${field.name}" th:disabled="${field.fixed}"
+	        required="required"
+			oninvalid="this.setCustomValidity('Informe o nome do campo')"
+			oninput="this.setCustomValidity('')">
+	</div>
+	<div class="col-2">
+		<select id="field-type" class="form-control" name="collection:fields:type" th:value="${field.type}" th:disabled="${field.fixed}">
+			<option value="STRING">Texto</option>
+			<option value="NUMBER">Númerico</option>
+			<option value="DATE">Data</option>
+			<option value="DATETIME">Data e hora</option>
+		</select>
+	</div>
+	<div class="col-3">
+		<input type="text" id="field-desc" class="form-control" name="collection:fields:description" placeholder="Digite a descrição" th:value="${field.description}" th:disabled="${field.fixed}"
+			required="required"
+			oninvalid="this.setCustomValidity('Informe a descrição do campo')"
+			oninput="this.setCustomValidity('')">
+	</div>
+	<div class="col-3">
+		<div class="switch">
+		    <label>
+		        Não
+		        <input name="collection:fields:required" type="checkbox" th:checked="${field.required}" th:disabled="${field.fixed}">
+		        <span class="lever"></span>
+		        Sim
+		    </label>
+		</div>
+	</div>
+	<div class="col-2">
+		<button type="button" class="btn btn-outline-grey btn-sm float-right" data-toggle="modal" data-target="|#${{btnNewModal}}|" th:disabled="${field.fixed}" onclick="$(this).parent().parent().html('')">Excluir</button>
+	</div>
+</partial>

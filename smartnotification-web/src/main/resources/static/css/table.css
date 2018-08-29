@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+/* TABELAS */
+
+.table-wrapper-100 {
+    display: block;
+    max-height: 100px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}

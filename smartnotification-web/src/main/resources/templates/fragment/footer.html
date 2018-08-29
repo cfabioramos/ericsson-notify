@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <footer th:fragment="footer" class="page-footerSS ericsson-blue">
+
+            <div th:insert="fragment/loading-dialog :: loading-dialog">
+            </div>
+    
+            <div id="modalContainer"></div>
+            <div class="footer-copyright">
+                <div class="container-fluid">
+                    &copy; <span class="text-muted"
+                        th:text="${#temporals.format(#temporals.createNow(), 'yyyy') + ' Smart Notification'}">
+                        2017 </span>
+                </div>
+            </div>
+                   
+            <script type="text/javascript">
+            	$("#message-dialog").modal();
+        	</script>
+    </footer>
+</html>

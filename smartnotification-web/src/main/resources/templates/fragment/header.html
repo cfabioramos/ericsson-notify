@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<header xmlns:th="http://www.thymeleaf.org" th:fragment=“header”>  
+
+        <nav class="navbar navbar-expand-lg navbar-dark ericsson-blue" style="border-radius: 0px;">
+            <!-- Navbar brand -->
+            <a class="navbar-brand" href="/" th:href="@{/}"> 
+                <img th:src="@{/img/logo-ericsson.png}" height="38px" width="180px" />
+            </a>
+
+            <!-- Collapse button -->
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><i class="fa fa-navicon" style="font-size: 24px"></i></span>
+            </button>
+
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <!-- Links -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a id="anchorDashboard" class="nav-link">
+                            <i class="fa fa-bar-chart"></i>&nbsp;Dashboard
+                        </a>
+                    </li>
+                    
+
+                    <!-- Menu War Room -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;Módulos</a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a  id="anchorPesquisarEstacao" class="dropdown-item waves-effect waves-light">
+                                <i class="fa fa-server" ></i>&nbsp;&nbsp;Gateway
+                            </a> 
+                            <a id="anchorNovastacao" class="dropdown-item waves-effect waves-light" href="/rules-engine/index">
+                                <i class="fa fa-gavel" ></i> &nbsp;&nbsp;Rules Engine
+                            </a> 
+                            <a id="anchorPesquisarWarRoom" class="dropdown-item waves-effect waves-light" href="/route/index">
+                                <i class="fa fa-send" ></i> &nbsp;&nbsp;Route
+                            </a> 
+                        </div>
+                    </li>
+                </ul>
+                
+                <!-- Menu Administrativo -->
+                <ul class="navbar-nav ml-auto nav-flex-icons">
+                    <li class="nav-item dropdown"><a
+                        class="nav-link dropdown-toggle waves-effect waves-light"
+                        id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"><i
+                            class="fa fa-user-circle"></i> </a>
+                        <div class="dropdown-menu dropdown-primary dropdown-menu-right"
+                            aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item waves-effect waves-light" href="#">
+                                <i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;Minha conta</a>
+
+                            <a class="dropdown-item waves-effect waves-light" id="anchorAdministracao" 
+                                th:if="${session.idPerfil == 1}" >
+                                <i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;&nbsp;Administração</a>
+                                 
+                            <a class="dropdown-item waves-effect waves-light" th:href="@{/logout}" href="/logout">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;Sair</a>
+                        </div></li>
+                </ul>
+            </div>
+            
+        </nav>
+		<ul class="nav justify-content-center grey lighten-4 py-4">
+		    <li class="nav-item">
+		        <a class="nav-link active" href="/modulo/event/index">Eventos</a>
+		    </li>
+		    <li class="nav-item">
+		        <a class="nav-link" href="#!">Regras de Notificação</a>
+		    </li>
+		    <li class="nav-item">
+		        <a class="nav-link" href="#!">Template de Mensagens</a>
+		    </li>
+		    <li class="nav-item">
+		        <a class="nav-link" href="#!">Aplicativos</a>
+		    </li>
+		    <li class="nav-item">
+		        <a class="nav-link" href="#!">Campanhas</a>
+		    </li>
+		    <li class="nav-item">
+		        <a class="nav-link" href="#!">Enriquecimento</a>
+		    </li>
+		    <li class="nav-item">
+		        <a class="nav-link" href="#!">Gerenciar Usuários</a>
+		    </li>
+		</ul>
+<!--         Breadcrumb -->
+<!--         <ol class="breadcrumb" th:if="${breadCrumb != null}"> -->
+<!--             <li th:class="|breadcrumb-item small-text ${{i.link != null && !i.link.isEmpty()? 'active' : ''}}|" th:each="i : ${breadCrumb.items}"> -->
+<!--                 <a th:href="${i.link}" th:text="${i.name}"></a> -->
+<!--             </li> -->
+<!--         </ol> -->
+		<br/>
+        <section class="container-fluid">
+        	<div class="row">
+        		<div class="col-2">
+        		</div>
+        		<div class="col-8">
+		            <div class="row">
+		                <div class="col-9" th:if="${titlePage != null}">
+		                    <h4 class="main-title font-weight-bold" th:text="${titlePage}">Titulo</h4>
+		                    <h6 class="description" th:text="${subTitlePage}" th:if="${subTitlePage != null}">1.0 Subtitulo</h6>
+		                </div>
+		                <div class="col-3" th:if="${buttonViewText != null}">
+							<button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" th:data-target="${idButtonViewModal}" th:onclick="${buttonViewAction}"><i class="fa fa-plus mr-1"></i><a th:text="|${{buttonViewText}}|"></a></button>
+		                	<a class="float-right"><i class="fa fa-filter" aria-hidden="true" style="margin-top: 10px;margin-right: 10px"></i></a>
+		                </div>
+		                <div class="dropdown-divider"></div>
+		                <br>
+		            </div>
+        		</div>
+        		<div class="col-2">
+        		</div>
+        	</div>
+        </section>
+
+</header>

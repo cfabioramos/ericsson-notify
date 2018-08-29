@@ -1,0 +1,66 @@
+<partial th:id="|collapse${{event.id}}|" th:class="|collapse hidden ${colapsedOpen != null && colapsedOpen ? 'show' : ''}|" role="tabpanel" th:aria-labelledby="|heading${{event.id}}|" data-parent="#accordionEx" xmlns:th="http://www.thymeleaf.org">
+	<hr/>
+    <div class="card-body">
+		<div class="row">
+			<div class="col-4">
+              		<label for="event-type">nType</label>
+                   <input type="number" id="event-ntype" class="form-control" name="eventType" th:value="${event.eventType}"					
+                    maxlength="4"
+					oninvalid="this.setCustomValidity('O nType do evento é obrigatório')"
+					required="required"
+					oninput="this.setCustomValidity('')">
+			</div>
+			<div class="col-4">
+           			<label for="event-type">Descrição</label>
+                  	<input type="text" id="event-desc" class="form-control" name="description" th:value="${event.description}" maxlength="100">
+			</div>
+			<div class="col-4">
+              		<label for="event-type">Origem</label>
+                  	<input type="text" th:id="|event-origin${event.id}|" class="form-control autocomplete-origin" name="origem" th:value="${event.origem}"
+     					        maxlength="100"
+     					        required="required"
+								oninvalid="this.setCustomValidity('Informe ao menos uma origem')"
+								oninput="this.setCustomValidity('')"
+								autocomplete="off">
+			</div>
+           </div>
+           <br/>
+		<div class="card card-body grey lighten-3">
+		    <h4 class="card-title">Campos 
+		    	<button type="button" class="btn btn-outline-grey btn-sm float-right" th:onclick="|loadHtml('/modulo/event/field/new', '#newFieldContainer${event.id}', true)|"><i class="fa fa-plus mr-1"></i>Criar novo campos</button>
+	    	</h4>
+		    <div class="card-body p-0">
+				<div class="row">
+					<div class="col-2">
+                		<label class="font-weight-bold">Nome</label>
+					</div>
+					<div class="col-2">
+               			<label class="font-weight-bold">Tipo</label>
+					</div>
+					<div class="col-3">
+                		<label class="font-weight-bold">Descrição</label>
+					</div>
+					<div class="col-3">
+                		<label class="font-weight-bold">Obrigatório</label>
+					</div>
+					<div class="col-2 text-center">
+                		<label class="font-weight-bold">Ações</label>
+					</div>
+	            </div>
+				<div th:each="field : ${event.fields}">
+			         <partial th:insert="../page/modulo/event/partials/edit_field_event :: partial">
+			         </partial>
+	            </div>
+	            <div th:id="|newFieldContainer${event.id}|"></div>
+		    </div>
+		</div>
+		<br/>
+	    <div class="card-body text-right p-0">
+	        <a class="card-link" data-toggle="modal" th:data-target="|#modalCancelEvent${event.id}|">Cancelar</a>
+            <button class="btn btn-elegant m-r-0" type="submit">Salvar</button>
+	    </div>
+    </div>
+    <script type="text/javascript">
+    	autocompleteRemote('.autocomplete-origin', '/origin/search');
+    </script>
+</partial>
